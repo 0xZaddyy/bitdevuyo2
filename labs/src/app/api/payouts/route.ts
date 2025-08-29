@@ -27,8 +27,8 @@ export async function POST(req: NextRequest) {
     {
       source: "offchain",
       fromAsset: "usdt",
-      toCurrency: "ugx",
-      settlementAmount: 1000000,
+      toCurrency: "ngn",
+      settlementAmount: 100000,
     },
     { headers: { Authorization: `Bearer ${env.BITNOB_SECRET_KEY}` } },
   );
@@ -38,15 +38,14 @@ export async function POST(req: NextRequest) {
     {
       quoteId: quote.data.quoteId,
       customerId: "e22795d9-23f6-48e6-8b30-be5718abd876",
-      country: "UG",
+      country: "NG",
       reference: crypto.randomUUID(),
-      paymentReason: "Bitnob Uganda Faucet",
       beneficiary: {
-        type: "MOBILEMONEY",
-        accountName: incoming.name,
-        network: "AIRTEL",
-        accountNumber: `256${incoming.phoneNumber.substring(1)}`,
+        type: "BANK",
+        bankCode: "100004",
+        accountNumber: incoming.phoneNumber,
       },
+      paymentReason: "Bitnob Nigeria Payout"
     },
     { headers: { Authorization: `Bearer ${env.BITNOB_SECRET_KEY}` } },
   );
